@@ -1,12 +1,10 @@
+const mongoose = require('mongoose');
 
-// Importamos la libreria de para trabajar con la base de datos MongoDB
-const mongoose = require('mongoose')
-
-mongoose.connect('mongodb://localhost/notes-db-app',{
+mongoose.connect('mongodb://localhost/notes-db-app', {
     useCreateIndex      :true,
     useNewUrlParser     :true,
     useFindAndModify    :false
-})
+});
 
-.then(db=>console.log('BD esta conectada'))
-// .catch(err=>console.error(err))
+    .then(db => console.log('DB esta conectada'));
+    .catch(err => console.log(err));
