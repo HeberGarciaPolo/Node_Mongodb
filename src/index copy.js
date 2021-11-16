@@ -11,7 +11,7 @@ const session = require('express-session');
 
 // initiliazations
 const app = express();
-require('./database')
+
 
 
 // settings
@@ -24,7 +24,7 @@ require('./database')
     app.set('views', path.join(__dirname, 'views')); 
 
     // Creamos el objeto de configuracion exphbs que contiene la informacion de las platillas
-    app.engine('.hbs', exphbs => ({
+    app.engine('.hbs', exphbs({
         
         defaultLayout   : 'main',                                   // Nombre del archivo principal (layouts)        
         layoutsDir      : path.join(app.get('views'),'layouts'),    // Ruta de la carpeta Layouts 
@@ -52,16 +52,15 @@ require('./database')
 
 
 // Routes
-    app.use(require('./routes/index'));
-    app.use(require('./routes/notes'));
-    app.use(require('./routes/users'));
+app.use(require('./routes/index'));
+app.use(require('./routes/notes'));
+app.use(require('./routes/users'));
 
 // Static files
-    app.use(express.static(path.join(__dirname,'public')))
-    
+
 // Server is listenning
 
-    app.listen(app.get('port'), () => {
-        console.log('Sever on port ',app.get('port'));
-    });
+app.listen(app.get('port'), () => {
+    console.log('Sever on port ',app.get('port'));
+});
 
