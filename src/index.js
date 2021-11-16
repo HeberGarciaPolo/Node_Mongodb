@@ -4,6 +4,10 @@ const express = require('express');
 const path = require('path'); 
 // configuramos handlebars para trabajar las plantillas html como .hbs  ()
 const exphbs = require('express-handlebars');
+// Requerimos en metodo method-override para que los formularios puedan enviar PUT DELETE
+const methodOverride =  require('method-override');
+// 
+const session = require('express-session');
 
 // initiliazations
 const app = express();
@@ -31,10 +35,17 @@ const app = express();
     // configuramos el motor de las vistas (.hbs)
     app.set('view engine','.hbs');                                  
 
-// Middlewares
-    app.use(express.urlencoded({extended:false }))
-
-
+// Middlewares (inicializamos las configuraciones iniciales)
+    app.use(express.urlencoded({extended: false }))
+    // sirve para que los formulario pueden enviar otro tipos de metodos no solo POST o GET 
+    // tambien pueden enviar PUT DELETE
+    app.use(methodOverride('_method'));
+    // inicializamos el modulo de sessiones para manejar las sesiones de usuarios
+    app.use(session({
+        secret              : 'mysecrretapp',
+        saveUninitialized   : true,
+        resave              : true
+    }));
 
 // Global Variables
 
