@@ -11,7 +11,7 @@ const session = require('express-session');
 
 // initiliazations
 const app = express();
-//require('./database')
+require('./database');
 
 
 // settings
